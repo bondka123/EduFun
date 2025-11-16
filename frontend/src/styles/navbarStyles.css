@@ -1,0 +1,225 @@
+/* ========== NAVBAR ========== */
+.navbar {
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  padding: 15px 0;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  font-family: 'Comic Sans MS', 'Arial Rounded MT Bold', sans-serif;
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: white;
+  font-size: 1.6rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  letter-spacing: 1px;
+}
+
+.navbar-logo:hover {
+  transform: scale(1.05);
+}
+
+.logo-emoji {
+  font-size: 2rem;
+  animation: float 3s ease-in-out infinite;
+}
+
+.logo-text {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* ========== NAVBAR MENU ========== */
+.navbar-menu {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.nav-logout {
+  background: rgba(255, 255, 255, 0.9);
+  color: #667eea;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  font-family: 'Comic Sans MS', 'Arial Rounded MT Bold', sans-serif;
+  font-size: 0.95rem;
+}
+
+.nav-logout:hover {
+  background: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* ========== HAMBURGER MENU ========== */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(10px, 10px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(8px, -8px);
+}
+
+/* ========== ANIMATIONS ========== */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .navbar-container {
+    padding: 0 15px;
+  }
+
+  .navbar-logo {
+    font-size: 1.4rem;
+  }
+
+  .logo-emoji {
+    font-size: 1.8rem;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .navbar-menu {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    flex-direction: column;
+    gap: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    border-bottom: 3px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .navbar-menu.active {
+    max-height: 500px;
+    padding: 15px 0;
+  }
+
+  .nav-link,
+  .nav-logout {
+    width: 100%;
+    text-align: left;
+    padding: 12px 20px;
+    border-radius: 0;
+    background: none;
+  }
+
+  .nav-link {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .nav-link:hover {
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  .nav-logout {
+    background: rgba(255, 255, 255, 0.2);
+    border-bottom: none;
+  }
+
+  .nav-logout:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 12px 0;
+  }
+
+  .navbar-container {
+    padding: 0 10px;
+  }
+
+  .navbar-logo {
+    font-size: 1.2rem;
+    gap: 8px;
+  }
+
+  .logo-emoji {
+    font-size: 1.5rem;
+  }
+
+  .logo-text {
+    display: none;
+  }
+
+  .nav-link {
+    font-size: 0.95rem;
+    padding: 10px 15px;
+  }
+
+  .nav-logout {
+    font-size: 0.9rem;
+    padding: 10px 15px;
+  }
+}
