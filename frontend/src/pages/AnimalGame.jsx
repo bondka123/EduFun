@@ -12,26 +12,38 @@ function AnimalGame() {
   const [correct, setCorrect] = useState(false);
 
   const animals = [
-    { emoji: '🐱', name: 'Chat', sound: 'Miaou!' },
-    { emoji: '🐶', name: 'Chien', sound: 'Ouaf!' },
-    { emoji: '🐄', name: 'Vache', sound: 'Meuh!' },
-    { emoji: '🐷', name: 'Cochon', sound: 'Oink!' },
-    { emoji: '🦆', name: 'Canard', sound: 'Coin coin!' },
-    { emoji: '🦌', name: 'Cerf', sound: 'Brame!' },
-    { emoji: '🦁', name: 'Lion', sound: 'Rugit!' },
-    { emoji: '🐯', name: 'Tigre', sound: 'Grogne!' },
-    { emoji: '🐸', name: 'Grenouille', sound: 'Coassement!' },
-    { emoji: '🐢', name: 'Tortue', sound: 'Silence' },
+    { emoji: '🐱', name: 'Chat', sound: '/sounds/chat.mp3' },
+    { emoji: '🐶', name: 'Chien', sound: '/sounds/chien.mp3' },
+    { emoji: '🐄', name: 'Vache', sound: '/sounds/vache.mp3' },
+    { emoji: '🐷', name: 'Cochon', sound: '/sounds/cochon.mp3' },
+    { emoji: '🦆', name: 'Canard', sound: '/sounds/canard.mp3' },
+    { emoji: '🦌', name: 'Cerf', sound: '/sounds/cerf.mp3' },
+    { emoji: '🦁', name: 'Lion', sound: '/sounds/lion.mp3' },
+    { emoji: '🐯', name: 'Tigre', sound: '/sounds/tigre.mp3' },
+    { emoji: '🐸', name: 'Grenouille', sound: '/sounds/grenouille.mp3' },
+    { emoji: '🐢', name: 'Tortue', sound: '/sounds/tortue.mp3' },
   ];
 
   useEffect(() => {
     generateLevel();
   }, [level]);
 
+  useEffect(() => {
+    if (currentAnimal) {
+      const audio = new Audio(currentAnimal.sound);
+      audio.onerror = () => {
+        console.error("Erreur de chargement du fichier audio :", currentAnimal.sound);
+      };
+      audio.play().catch(err => {
+        console.error("Erreur de lecture audio :", err);
+      });
+    }
+  }, [currentAnimal]);
+
   const generateLevel = () => {
     const randomAnimal = animals[Math.floor(Math.random() * animals.length)];
     setCurrentAnimal(randomAnimal);
-    
+
     const randomAnimals = [randomAnimal];
     while (randomAnimals.length < Math.min(level + 2, animals.length)) {
       const animal = animals[Math.floor(Math.random() * animals.length)];
@@ -39,7 +51,7 @@ function AnimalGame() {
         randomAnimals.push(animal);
       }
     }
-    
+
     setOptions(randomAnimals.sort(() => Math.random() - 0.5));
     setAnswered(false);
     setCorrect(false);
@@ -68,13 +80,23 @@ function AnimalGame() {
 
       <div className="animal-content">
         <div className="animal-instruction">
-          <p className="instruction-text">Clique sur l'animal :</p>
+          <p className="instruction-text">Écoute le son et clique sur l'animal :</p>
           <div className="animal-display">
             {currentAnimal && (
-              <>
-                <div className="animal-emoji-large">{currentAnimal.emoji}</div>
-                <p className="animal-sound">{currentAnimal.sound}</p>
-              </>
+              <button 
+                className="btn-sound" 
+                onClick={() => {
+                  const audio = new Audio(currentAnimal.sound);
+                  audio.onerror = () => {
+                    console.error("Erreur de chargement du fichier audio :", currentAnimal.sound);
+                  };
+                  audio.play().catch(err => {
+                    console.error("Erreur de lecture audio :", err);
+                  });
+                }}
+              >
+                🔊 Écouter le son
+              </button>
             )}
           </div>
         </div>
